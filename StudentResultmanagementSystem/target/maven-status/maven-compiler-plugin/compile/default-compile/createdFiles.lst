@@ -1,0 +1,4 @@
+com\mycompany\results\servlets\ResultServlet.class
+com\mycompany\results\util\DatabaseUtil.class
+com\mycompany\results\models\SubjectResult.class
+com\mycompany\results\models\Student.class
