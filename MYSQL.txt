@@ -1,0 +1,47 @@
+CREATE DATABASE university_db;
+USE university_db;
+CREATE TABLE students (
+  student_id VARCHAR(10) PRIMARY KEY,
+  first_name VARCHAR(50),
+  last_name VARCHAR(50),
+  class_name VARCHAR(20)
+);
+CREATE TABLE subjects (
+  subject_id VARCHAR(10) PRIMARY KEY,
+  subject_name VARCHAR(100),
+  max_marks INT DEFAULT 100
+);
+CREATE TABLE results (
+  result_id INT AUTO_INCREMENT PRIMARY KEY,
+  student_id_fk VARCHAR(10),
+  subject_id_fk VARCHAR(10),
+  marks_obtained INT,
+  
+  -- Link to the 'students' table
+  FOREIGN KEY (student_id_fk) 
+    REFERENCES students(student_id)
+    ON DELETE CASCADE, -- If a student is deleted, their results are also deleted
+    
+  -- Link to the 'subjects' table
+  FOREIGN KEY (subject_id_fk) 
+    REFERENCES subjects(subject_id)
+);
+INSERT INTO students (student_id, first_name, last_name, class_name) 
+VALUES
+('S101', 'Aarav', 'Patel', '10th A'),
+('S102', 'Bhavna', 'Shah', '10th A'),
+('S103', 'Chetan', 'Dave', '10th B');
+INSERT INTO subjects (subject_id, subject_name, max_marks) 
+VALUES
+('MATH10', 'Mathematics', 100),
+('SCI10', 'Science', 100),
+('ENG10', 'English', 100);
+INSERT INTO results (student_id_fk, subject_id_fk, marks_obtained) 
+VALUES
+('S101', 'MATH10', 85),  -- Aarav's Math score
+('S101', 'SCI10', 92),   -- Aarav's Science score
+('S102', 'MATH10', 95),  -- Bhavna's Math score
+('S102', 'SCI10', 88),   -- Bhavna's Science score
+('S102', 'ENG10', 76),   -- Bhavna's English score
+('S103', 'MATH10', 64),  -- Chetan's Math score
+('S103', 'ENG10', 81);   -- Chetan's English score
